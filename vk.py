@@ -5,7 +5,6 @@ except ImportError as err:
     raise err
 
 
-
 class User:
     def __init__(self, login, password):
 
