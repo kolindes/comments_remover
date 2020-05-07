@@ -7,8 +7,8 @@ except ImportError as err:
     raise err
 
 
-def collect_comments_ids():
-    source_and_comment_ids = []
+def collect_comments():
+    comments = []
 
     comments_dir = 'comments/'
     all_files = os.listdir(comments_dir)
@@ -25,10 +25,12 @@ def collect_comments_ids():
             href = i.get('href')
 
             if 'wall' in href:
-                if href not in source_and_comment_ids:
-                    source_id = href.split('wall')[1].split('_')[0]
-                    comment_id = href.split('reply=')[-1].split('&')[0] if '&' in href else href.split('reply=')[-1]
+                source_id = href.split('wall')[1].split('_')[0]
+                comment_id = href.split('reply=')[-1].split('&')[0] if '&' in href else href.split('reply=')[-1]
 
-                    source_and_comment_ids.append((source_id, comment_id))
+                comment = (source_id, comment_id)
+                
+                if comment not in comments:
+                    source_and_comment_ids.append(comment)
 
-    return source_and_comment_ids
+    return comments
